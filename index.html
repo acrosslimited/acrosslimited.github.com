@@ -1,13 +1,24 @@
 <html>
-	<title>Across Limited</title>
-	<head>
-		<link rel="stylesheet" href="style.css" type="text/css" /> 
-		<script type="text/javascript" src="jquery.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-		<script type="text/javascript">
+<head>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
+    
+    
+     <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
+    
+    
+    
+<script type="text/javascript">
 			var isLogoHidden = false;
 			
 			$(document).ready(function() {
+				enableScrollbar(false);
 				$('.board').board();
 				$('.board').board('resize',{width:1,height:1});
 				$(window).resize(function(){
@@ -30,9 +41,12 @@
 							top:top+height/2,
 							left:left+width/2,
 							width:"0px",
+							border:"0px",
 							height:"0px"
+							
 						}, function(){
 							$(this).hide();
+							$(this).remove();
 							isLogoHidden = true;
 						});
 					});
@@ -49,8 +63,27 @@
 				});
 			});
 			
+			function enableScrollbar(enable){
+				if(enable){
+					$('#about').css("overflow-y", "auto");
+					$('#product').css("overflow-y", "auto");
+					$('#contactus').css("overflow-y", "auto");
+				}else{
+					$('#about').css("overflow-y", "hidden");
+					$('#product').css("overflow-y", "hidden");
+					$('#contactus').css("overflow-y", "hidden");
+					$('#about').css("overflow-x", "hidden");
+					$('#product').css("overflow-x", "hidden");
+					$('#contactus').css("overflow-x", "hidden");
+				}
+			}
+			
 			function gotoHome(){
 				if(isLogoHidden){
+					$('#about').scrollTop(0);
+					$('#product').scrollTop(0);
+					$('#contactus').scrollTop(0);
+					enableScrollbar(false);
 					$('#about').board('move',{row:0,col:0,rowspan:1,colspan:3,isAnim:true});
 					$('#product').board('move',{row:1,col:0,rowspan:1,colspan:3,isAnim:true});
 					$('#contactus').board('move',{row:2,col:0,rowspan:1,colspan:3,isAnim:true});
@@ -58,6 +91,7 @@
 			}
 			function gotoAbout(){
 				if(isLogoHidden){
+					enableScrollbar(true);
 					$('#about').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
 					$('#product').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
 					$('#contactus').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
@@ -65,6 +99,7 @@
 			}
 			function gotoProduct(){
 				if(isLogoHidden){
+					enableScrollbar(true);
 					$('#about').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
 					$('#product').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
 					$('#contactus').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
@@ -72,42 +107,47 @@
 			}
 			function gotoContactus(){
 				if(isLogoHidden){
+					enableScrollbar(true);
 					$('#about').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
 					$('#product').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
 					$('#contactus').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
 				}
 			}
+
 		</script>
-	</head>
-	<body>
-		<div class="table"><div class="cell"><div class="cellcenter">
-		<div class="header" height="12">
-			<div class="nav" onclick="gotoHome()">Home</div>
-			<div class="nav" onclick="gotoAbout()">About</div>
-			<div class="nav" onclick="gotoProduct()">Product</div>
-			<div class="nav" onclick="gotoContactus()">Contact us</div>
-		</div>
-		<div class="content">
-			<div class="pBoard">
-				<div class="board" row="3" col="3">
-					<div id="about" class="block contentBlock" row="0" col="0" rowspan="1" colspan="3"></div>
-					<div id="product" class="block contentBlock" row="1" col="0" rowspan="1" colspan="3"></div>
-					<div id="contactus" class="block contentBlock" row="2" col="0" rowspan="1" colspan="3"></div>
-					<div id="Logo1" class="block logo" row="0" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo1.png);"></div>
-					<div id="Logo2" class="block logo" row="0" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo2.png);"></div>
-					<div id="Logo3" class="block logo" row="0" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo3.png);"></div>
-					<div id="Logo4" class="block logo" row="1" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo4.png);"></div>
-					<div id="Logo5" class="block logo" row="1" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo5.png);"></div>
-					<div id="Logo6" class="block logo" row="1" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo6.png);"></div>
-					<div id="Logo7" class="block logo" row="2" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo7.png);"></div>
-					<div id="Logo8" class="block logo" row="2" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo8.png);"></div>
-					<div id="Logo9" class="block logo" row="2" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo9.png);"></div>
-				</div>
-			</div>
-		</div>
-		<div class="footer">
-			Copyright &copy; 2012 - 2012 Across Limited (Hong Kong)
-		</div>
-		</div></div></div>
-	</body>
+   
+</head>
+<body>
+<div class="table">
+  <div class="cell">
+    <div class="cellcenter">
+      <div class="header" height="12">
+        <div class="nav" onClick="gotoHome()">Home</div>
+        <div class="nav" onClick="gotoAbout()">About</div>
+        <div class="nav" onClick="gotoProduct()">Product</div>
+        <div class="nav" onClick="gotoContactus()">Contact us</div>
+      </div>
+      <div class="content">
+        <div class="pBoard">
+          <div class="board" row="3" col="3">
+            <div id="about" class="block contentBlock" row="0" col="0" rowspan="1" colspan="3"></div>
+            <div id="product" class="block contentBlock" row="1" col="0" rowspan="1" colspan="3"></div>
+            <div id="contactus" class="block contentBlock" row="2" col="0" rowspan="1" colspan="3"></div>
+            <div id="Logo1" class="block logo" row="0" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo1.png);border:0px; "></div>
+            <div id="Logo2" class="block logo" row="0" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo2.png);border:0px;"></div>
+            <div id="Logo3" class="block logo" row="0" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo3.png);border:0px;"></div>
+            <div id="Logo4" class="block logo" row="1" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo4.png);border:0px;"></div>
+            <div id="Logo5" class="block logo" row="1" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo5.png);border:0px;"></div>
+            <div id="Logo6" class="block logo" row="1" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo6.png);border:0px;"></div>
+            <div id="Logo7" class="block logo" row="2" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo7.png);border:0px;"></div>
+            <div id="Logo8" class="block logo" row="2" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo8.png);border:0px;"></div>
+            <div id="Logo9" class="block logo" row="2" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo9.png);border:0px;"></div>						
+          </div>
+        </div>
+      </div>
+      <div class="footer"> Copyright &copy; 2012 - 2012 Across Limited (Hong Kong) </div>
+    </div>
+  </div>
+</div>
+</body>
 </html>

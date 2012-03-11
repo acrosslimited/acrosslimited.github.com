@@ -1,4 +1,4 @@
-(function($){
+	(function($){
 	var methods = {
 		init : function(options) {
 			return this.each(function(){
@@ -84,18 +84,18 @@
 						width = 0;
 					}else if(settings.col+settings.colspan < col){
 						var lasttdpos = $(this).parent().find('#'+settings.row+'_'+(settings.col+settings.colspan)).position();
-						width = lasttdpos.left - tdpos.left - 1;
+						width = lasttdpos.left - tdpos.left;
 					}else{
-						width = $(this).parent().width() - tdpos.left - 2;
+						width = $(this).parent().width() - tdpos.left - 1;
 					}
 					
 					if(settings.rowspan == 0){
 						height = 0;
 					}else if(settings.row+settings.rowspan < row){
 						var lasttdpos = $(this).parent().find('#'+(settings.row+settings.rowspan)+'_'+settings.col).position();
-						height = lasttdpos.top - tdpos.top - 1;
+						height = lasttdpos.top - tdpos.top;
 					}else{
-						height = $(this).parent().height() - tdpos.top - 2;
+						height = $(this).parent().height() - tdpos.top - 1;
 					}
 					
 					if(settings.rowspan > 0 && settings.colspan > 0){
