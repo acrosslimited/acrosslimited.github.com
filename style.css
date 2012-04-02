@@ -1,162 +1,127 @@
-body{
-	font-size:12pt;
-	background-color:#fff;
-	color: #000;
-	font-family:"Arial";
-	font-size:10px;
+body {
+	font-family:"Arial"; font-size:10px;
+	background-color:#fff; color: #000;
 }
-
-div.table{
-	width:100%;
-	height:100%;
-	display:table; 
+p {
+	font-size:11px;
+	color:#000;
+}
+div.table {
+	width:100%;	height:100%;
+	display:table;
 	border:0px;
-	
 }
-
-div.cell{
+div.cell {
 	vertical-align:middle;
-    display:table-cell;
+	text-align:center;
+	display:table-cell;
 	border:0px;
-
 }
-
-div.cellcenter{
+div.cellcenter {
 	margin:auto;
 	width:600px;
 }
-
-.header{
+.header {
 	overflow:auto;
 }
-
-.header .nav{
-	position:relative;
-	width:80px;
-	border:0px;
+.nav {
+	position:relative; width:80px;
 	text-align:center;
 	float:left;
-	cursor:pointer;border:0px;
+	cursor:pointer;
+	border:0px;
 }
-
-.header .nav:hover{
-	background-color:#c8c8c8;
+.nav:hover {
+	background-color:#CCEFFC;
 }
-
-.content{
+.content {
+	width:600px;
 	height:600px;
+	background-color:#CCEFFC;
+	overflow:hidden;
+	text-align:left;
 }
-
-.footer{
+.back_button {	
+	width:600px; height:30px;
+	background-color:#007FFF;
+	color:#FFFFFF;
+	font-weight:bold;
+	cursor:pointer;
+	vertical-align:middle;
+	display:none;
+	visibility:collapse;
 }
-
-.pBoard{
-	width:100%;
-	height:100%;
+.footer {
 }
-
-.board{
-	position:relative;
-	width:100%;
-	height:100%;
+.pBoard {
+	width:100%;	height:100%;
+}
+.board {
+	position:relative; width:100%; height:100%;
 	word-wrap:break-word;
 }
-
-.block{
+.block {
 	position:absolute;
 	border:0px;
 	overflow:auto;
 	z-index:11;
 }
-
 table.blockTable {
-	position:absolute;
-	width:100%;
-	height:100%;
-	padding:0px;
-	margin:0px;
+	position:absolute; width:100%; height:100%;
+	padding:0px; margin:0px;
 	border-collapse:collapse;
 }
-
 tr.blockTR {
 	border-collapse:collapse;
-	padding:0px;
-	margin:0px;
+	padding:0px; margin:0px;
 }
-
-.logo{
-	background-color:#000;
+.logo {
+	background-color:#CCEFFC;
 }
-
-.contentBlock{
+.contentBlock {
 	display:none;
+	background-color:#CCEFFC;
 }
-#about{
-	background-color:#ffffff;
-	height:200px;
-	widows:600px;
-	
-	background:url(image/logoc.png);
-	background-repeat:no-repeat;
-	
-
+/*Page*/
+.page {
+	width:600;
+	background-color:#CCEFFC;
+	overflow:auto;
 }
-#product{
-	background-color:#111;
-	background:url(image/mbbanner.png);
-		background-repeat:no-repeat;
+.pageHeader {
+	width:100%; height:200;
 }
-#contactus{
-	background-color:#222;
-	
-	background:url(image/logoc.png);
-		background-repeat:no-repeat;
+.pageContent {
+	background-color:#fff;
+	margin:20;
+	padding:10 10 10 10;
 }
-
-p{
-	font-size:11px;
-	color:#000;}
-.companyInfo{
-	position:relative;
-	float:left;
-	top:35px;	
-	width:580;
-
-}
-
-
-/*
----------*/
-
+/*nivo slider*/
 .theme-default .nivoSlider {
 	position:relative;
 	background:#fff url(image/loading.gif) no-repeat 50% 50%;
-    margin-bottom:50px;
-    -webkit-box-shadow: 0px 1px 5px 0px #4a4a4a;
-    -moz-box-shadow: 0px 1px 5px 0px #4a4a4a;
-    box-shadow: 0px 1px 5px 0px #4a4a4a;
+	margin-bottom:50px;
+	-webkit-box-shadow: 0px 1px 5px 0px #4a4a4a;
+	-moz-box-shadow: 0px 1px 5px 0px #4a4a4a;
+	box-shadow: 0px 1px 5px 0px #4a4a4a;
 }
 .theme-default .nivoSlider img {
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:0px; left:0px;
 	display:none;
 }
 .theme-default .nivoSlider a {
 	border:0;
 	display:block;
 }
-
 .theme-default .nivo-controlNav {
 	position:absolute;
-	left:50%;
-	bottom: 2px;
-    margin-left:-40px; /* Tweak this to center bullets */
+	left:50%; bottom: 2px;
+	margin-left:-40px; /* Tweak this to center bullets */
 }
 .theme-default .nivo-controlNav a {
 	display:block;
-	width:22px;
-	height:22px;
+	width:22px;	height:22px;
 	background:url(image/bullets.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
@@ -166,13 +131,10 @@ p{
 .theme-default .nivo-controlNav a.active {
 	background-position:0 -22px;
 	z-index: 1000;
-	
 }
-
 .theme-default .nivo-directionNav a {
 	display:block;
-	width:30px;
-	height:30px;
+	width:30px; height:30px;
 	background:url(image/arrows.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
@@ -184,48 +146,37 @@ p{
 .theme-default a.nivo-prevNav {
 	left:15px;
 }
-
 .theme-default .nivo-caption {
-    font-family: Helvetica, Arial, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 }
 .theme-default .nivo-caption a {
-    color:#fff;
-    border-bottom:1px dotted #fff;
+	color:#fff;
+	border-bottom:1px dotted #fff;
 }
 .theme-default .nivo-caption a:hover {
-    color:#fff;
+	color:#fff;
 }
-
-
-
-/* The Nivo Slider styles */
 .nivoSlider {
 	position:relative;
 }
 .nivoSlider img {
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:0px; left:0px;
 }
 /* If an image is wrapped in a link */
 .nivoSlider a.nivo-imageLink {
-	position:absolute;
-	top:0px;
-	left:0px;
-	width:100%;
-	height:100%;
+	position:absolute; width:100%; height:100%;
+	top:0px; left:0px;
 	border:0;
-	padding:0;
-	margin:0;
+	padding:0; margin:0;
 	z-index:6;
 	display:none;
 }
 /* The slices and boxes in the Slider */
 .nivo-slice {
 	display:block;
-	position:absolute;
+	position:absolute; height:100%;
 	z-index:5;
-	height:100%;
 }
 .nivo-box {
 	display:block;
@@ -234,24 +185,21 @@ p{
 }
 /* Caption styles */
 .nivo-caption {
-	position:absolute;
-	left:0px;
-	bottom:0px;
+	position:absolute; width:100%;
+	left:0px; bottom:0px;
 	background:#000;
 	color:#fff;
-	opacity:0.8; /* Overridden by captionOpacity setting */
-	width:100%;
+	opacity:0.8;
 	z-index:8;
 }
 .nivo-caption p {
-	padding:5px;
-	margin:0;
+	padding:5px; margin:0;
 }
 .nivo-caption a {
 	display:inline !important;
 }
 .nivo-html-caption {
-    display:none;
+	display:none;
 }
 /* Direction nav styles (e.g. Next & Prev) */
 .nivo-directionNav a {
@@ -275,21 +223,11 @@ p{
 .nivo-controlNav a.active {
 	font-weight:bold;
 }
-
-
 .theme-default #slider {
-   
-    width:300px; /* Make sure your images are the same size */
-    height:200px; /* Make sure your images are the same size */
+	width:300px; height:200px; /* Make sure your images are the same size */
 }
-.theme-pascal.slider-wrapper,
-.theme-orman.slider-wrapper {
- 
+.theme-pascal.slider-wrapper,  .theme-orman.slider-wrapper {
 }
-
-/*====================*/
-/*=== Other Styles ===*/
-/*====================*/
 .clear {
 	clear:both;
 }

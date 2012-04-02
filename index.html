@@ -3,22 +3,15 @@
 <link rel="stylesheet" href="style.css" type="text/css" />
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
-    
-    
-     <script type="text/javascript">
-    $(window).load(function() {
-        $('#slider').nivoSlider();
-    });
-    </script>
-    
-    
-    
+<script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
 <script type="text/javascript">
 			var isLogoHidden = false;
 			
 			$(document).ready(function() {
+				switchMobile();
 				enableScrollbar(false);
+				enableBackButton(false);
+				createLayer();
 				$('.board').board();
 				$('.board').board('resize',{width:1,height:1});
 				$(window).resize(function(){
@@ -27,6 +20,9 @@
 				
 				$('#about').load('about.html');
 				$('#product').load('product.html');
+				$('#product_pic').load('product_pic.html', function(){
+					$('#slider').nivoSlider();
+				});
 				$('#contactus').load('contactus.html');
 				
 				$('.logo').click(function(){
@@ -50,6 +46,7 @@
 							isLogoHidden = true;
 						});
 					});
+					$('.layer').hide();;
 				});
 				
 				$('#about').click(function(){
@@ -61,8 +58,42 @@
 				$('#contactus').click(function(){
 					gotoContactus();
 				});
+			
+				$('.back_button').click(function(){
+					gotoHome();
+				});
 			});
 			
+			function isMobile(){
+				var useragent = navigator.userAgent;
+				useragent = useragent.toLowerCase();
+				if(useragent.indexOf('iphone') != -1 || 
+					useragent.indexOf('symbianos') != -1 || 
+					useragent.indexOf('ipad') != -1 || 
+					useragent.indexOf('ipod') != -1 || 
+					useragent.indexOf('android') != -1 || 
+					useragent.indexOf('blackberry') != -1 || 
+					useragent.indexOf('samsung') != -1 || 
+					useragent.indexOf('nokia') != -1 || 
+					useragent.indexOf('windows ce') != -1 || 
+					useragent.indexOf('sonyericsson') != -1 || 
+					useragent.indexOf('webos') != -1 || 
+					useragent.indexOf('wap') != -1 || 
+					useragent.indexOf('motor') != -1 || 
+					useragent.indexOf('symbian') != -1){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			
+			function switchMobile(){
+				if(isMobile()){
+					//diable menu
+					$('.header').css("display", "none");
+				}
+			}
+						
 			function enableScrollbar(enable){
 				if(enable){
 					$('#about').css("overflow-y", "auto");
@@ -71,10 +102,50 @@
 				}else{
 					$('#about').css("overflow-y", "hidden");
 					$('#product').css("overflow-y", "hidden");
+					$('#product_pic').css("overflow-y", "hidden");
 					$('#contactus').css("overflow-y", "hidden");
 					$('#about').css("overflow-x", "hidden");
 					$('#product').css("overflow-x", "hidden");
+					$('#product_pic').css("overflow-x", "hidden");
 					$('#contactus').css("overflow-x", "hidden");
+				}
+			}
+			
+			function enableBackButton(enable){
+				if(isMobile()){
+					if(enable){
+						$('.back_button').css("display", "table-cell");
+						$('.back_button').css("visibility", "visible");
+					}else{
+						$('.back_button').css("display", "table-cell");
+						$('.back_button').css("visibility", "hidden");
+					}
+				}
+			}
+			
+			function createLayer(){
+				if(!isMobile()){
+					$('.board').each(function(){
+						var row = $(this).attr('row');
+						var col = $(this).attr('col');
+						for(var i=0; i<row; i++){
+							for(var j=0; j<col; j++){
+								$(this).append('<div class="block logo layer" row="'+i+'" col="'+j+'" rowspan="1" colspan="1"></div>');
+							}
+						}
+					});
+					$('.layer').css({opacity:0});
+					$('.layer').hover(
+					function(){
+						$(this).stop(true, true).animate({
+							opacity:1
+						},1000);
+					},
+					function(){
+						$(this).stop(true, true).animate({
+							opacity:0
+						},1000);
+					});
 				}
 			}
 			
@@ -84,34 +155,106 @@
 					$('#product').scrollTop(0);
 					$('#contactus').scrollTop(0);
 					enableScrollbar(false);
-					$('#about').board('move',{row:0,col:0,rowspan:1,colspan:3,isAnim:true});
-					$('#product').board('move',{row:1,col:0,rowspan:1,colspan:3,isAnim:true});
-					$('#contactus').board('move',{row:2,col:0,rowspan:1,colspan:3,isAnim:true});
+					enableBackButton(false);
+					homeAbout();
+					homeProduct();
+					homeProductPic();
+					homeContactus();
 				}
 			}
 			function gotoAbout(){
 				if(isLogoHidden){
 					enableScrollbar(true);
-					$('#about').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
-					$('#product').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
-					$('#contactus').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
+					enableBackButton(true);
+					openAbout();
+					closeProduct();
+					closeProductPic();
+					closeContactus();
 				}
 			}
 			function gotoProduct(){
 				if(isLogoHidden){
 					enableScrollbar(true);
-					$('#about').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
-					$('#product').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
-					$('#contactus').board('move',{row:3,col:0,rowspan:0,colspan:3,isAnim:true});
+					enableBackButton(true);
+					closeAbout();
+					openProduct();
+					closeProductPic();
+					closeContactus();
 				}
 			}
 			function gotoContactus(){
 				if(isLogoHidden){
 					enableScrollbar(true);
-					$('#about').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
-					$('#product').board('move',{row:0,col:0,rowspan:0,colspan:3,isAnim:true});
-					$('#contactus').board('move',{row:0,col:0,rowspan:3,colspan:3,isAnim:true});
+					enableBackButton(true);
+					closeAbout();
+					closeProduct();
+					closeProductPic();
+					openContactus();
 				}
+			}
+			
+			function openAbout(){
+				$('#about').stop();
+				$('#about').board('move',{row:0,col:0,rowspan:6,colspan:6,isAnim:true});
+			}
+			function closeAbout(){
+				$('#about').stop();
+				$('#about').board('move',{row:6,col:0,rowspan:0,colspan:6,isAnim:true});
+			}
+			function homeAbout(){
+				$('#about').stop();
+				$('#about').board('move',{row:0,col:0,rowspan:2,colspan:6,isAnim:true});
+			}
+			
+			function openProduct(){
+				$('#product').stop();
+				$('#product').board('move',{row:0,col:0,rowspan:6,colspan:6,isAnim:true});
+			}
+			function closeProduct(){
+				$('#product').stop();
+				$('#product').board('move',{row:6,col:0,rowspan:0,colspan:6,isAnim:true});
+			}
+			function homeProduct(){
+				$('#product').stop();
+				$('#product').board('move',{row:2,col:0,rowspan:2,colspan:6,isAnim:true});
+			}
+			
+			function openProductPic(){
+				$('#product_pic').stop();
+				$('#product_pic').board('move',{row:4,col:0,rowspan:2,colspan:3,isAnim:true});
+			}
+			function closeProductPic(){
+				$('#product_pic').stop();
+				$('#product_pic').board('move',{row:6,col:0,rowspan:0,colspan:6,isAnim:true});
+			}
+			function homeProductPic(){
+				$('#product_pic').stop();
+				$('#product_pic').board('move',{row:4,col:0,rowspan:2,colspan:3,isAnim:true});
+			}
+			
+			function openContactus(){
+				$('#contactus').stop();
+				var row1 = parseInt($('#contactus').attr('row'));
+				var rowspan1 = parseInt($('#contactus').attr('rowspan'));
+				$('#contactus').board('move',{row:row1,col:0,rowspan:rowspan1,colspan:6,isAnim:true}, function(){
+					$('#contactus').board('move',{row:0,col:0,rowspan:6,colspan:6,isAnim:true});
+				});
+			}
+			function closeContactus(){
+				$('#contactus').stop();
+				var col1 = parseInt($('#contactus').attr('col'));
+				var colspan1 = parseInt($('#contactus').attr('colspan'));
+				$('#contactus').board('move',{row:6,col:col1,rowspan:0,colspan:colspan1,isAnim:true}, function(){
+					$('#contactus').board('move',{row:6,col:3,rowspan:0,colspan:3,isAnim:true});
+				});
+			}
+			function homeContactus(){
+				$('#contactus').stop();
+				var col1 = parseInt($('#contactus').attr('col'));
+				var colspan1 = parseInt($('#contactus').attr('colspan'));
+				$('#contactus').board('move',{row:4,col:col1,rowspan:2,colspan:colspan1,isAnim:true}, function(){
+					$('#contactus').board('move',{row:4,col:3,rowspan:2,colspan:3,isAnim:true});
+				});
 			}
 
 		</script>
@@ -119,7 +262,7 @@
 </head>
 <body>
 <div class="table">
-  <div class="cell">
+  <div class="cell" >
     <div class="cellcenter">
       <div class="header" height="12">
         <div class="nav" onClick="gotoHome()">Home</div>
@@ -129,22 +272,24 @@
       </div>
       <div class="content">
         <div class="pBoard">
-          <div class="board" row="3" col="3">
-            <div id="about" class="block contentBlock" row="0" col="0" rowspan="1" colspan="3"></div>
-            <div id="product" class="block contentBlock" row="1" col="0" rowspan="1" colspan="3"></div>
-            <div id="contactus" class="block contentBlock" row="2" col="0" rowspan="1" colspan="3"></div>
-            <div id="Logo1" class="block logo" row="0" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo1.png);border:0px; "></div>
-            <div id="Logo2" class="block logo" row="0" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo2.png);border:0px;"></div>
-            <div id="Logo3" class="block logo" row="0" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo3.png);border:0px;"></div>
-            <div id="Logo4" class="block logo" row="1" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo4.png);border:0px;"></div>
-            <div id="Logo5" class="block logo" row="1" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo5.png);border:0px;"></div>
-            <div id="Logo6" class="block logo" row="1" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo6.png);border:0px;"></div>
-            <div id="Logo7" class="block logo" row="2" col="0" rowspan="1", colspan="1" style="background-image:url(image/logo7.png);border:0px;"></div>
-            <div id="Logo8" class="block logo" row="2" col="1" rowspan="1", colspan="1" style="background-image:url(image/logo8.png);border:0px;"></div>
-            <div id="Logo9" class="block logo" row="2" col="2" rowspan="1", colspan="1" style="background-image:url(image/logo9.png);border:0px;"></div>						
+          <div class="board" row="6" col="6">
+            <div id="about" class="block contentBlock" row="0" col="0" rowspan="2" colspan="6"></div>
+            <div id="product" class="block contentBlock" row="2" col="0" rowspan="2" colspan="6"></div>
+			<div id="product_pic" class="block contentBlock" row="4" col="0" rowspan="2" colspan="3"></div>
+            <div id="contactus" class="block contentBlock" row="4" col="3" rowspan="2" colspan="3"></div>
+            <div id="Logo1" class="block logo" row="0" col="0" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo2" class="block logo" row="0" col="2" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo3" class="block logo" row="0" col="4" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo4" class="block logo" row="2" col="0" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo5" class="block logo" row="2" col="2" rowspan="2", colspan="2" style="background-image:url(image/logo5.png);border:0px;"></div>
+            <div id="Logo6" class="block logo" row="2" col="4" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo7" class="block logo" row="4" col="0" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo8" class="block logo" row="4" col="2" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
+            <div id="Logo9" class="block logo" row="4" col="4" rowspan="2", colspan="2" style="background-image:url(image/logo1.png);border:0px;"></div>
           </div>
         </div>
       </div>
+	  <div class="back_button">BACK</div>
       <div class="footer"> Copyright &copy; 2012 - 2012 Across Limited (Hong Kong) </div>
     </div>
   </div>
