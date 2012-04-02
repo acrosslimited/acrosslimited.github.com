@@ -96,6 +96,32 @@ tr.blockTR {
 	margin:20;
 	padding:10 10 10 10;
 }
+/*Page style*/
+/*fix the load problem in mobile*/
+#aboutlogodiv {
+	background-image:url(image/about_n.png);
+	background-repeat:no-repeat;
+}
+#aboutlogodiv:hover {
+	background-image:url(image/about_m.png);
+	background-repeat:no-repeat;
+}
+#contactusdiv {
+	background-image:url(image/contactus_n.png);
+	background-repeat:no-repeat;
+}
+#contactusdiv:hover {
+	background-image:url(image/contactus_m.png);
+	background-repeat:no-repeat;
+}
+#productbannerdiv {
+	background-image:url(image/mdbanner_n.png);
+	background-repeat:no-repeat;
+}
+#productbannerdiv:hover {
+	background-image:url(image/mdbanner_m.png);
+	background-repeat:no-repeat;
+}
 /*nivo slider*/
 .theme-default .nivoSlider {
 	position:relative;
